@@ -370,35 +370,6 @@ h1 em{font-style:normal;color:var(--accent-text)}
 .status{animation:fade .9s cubic-bezier(.25,.55,.55,1) 10.2s both}
 @keyframes fade{from{opacity:0}to{opacity:1}}
 
-/* ── Short and wide: landscape phones ─────────────────────────────────
-   The --ls floor is height-blind. min(11.5svh, 8.6vw) never wins on a
-   phone — 8.6vw only reaches 52px at a 605px viewport — so --ls sat on
-   its 52px floor and the stage stayed a hard 260px at EVERY viewport,
-   portrait and landscape alike. Inside a 390px-tall landscape window
-   that is two thirds of the screen spent before the headline starts:
-   measured, the page ran 141px past the fold at 844×390 and .micro and
-   .status were off-screen at every landscape size there is.
-   Here the letter box follows the HEIGHT instead of the width, and
-   every reserve below it tightens in step. 600px, not 520px, is the
-   real cut: the default h1 grows with 2.35vw while the height does not
-   follow, so a wide-and-short window overflows long after the phones
-   do — 1200×500 overspends by 38px on the headline alone. */
-@media (orientation: landscape) and (max-height: 600px){
-  main{padding-block:clamp(8px,2svh,20px)}
-  .stage{
-    --ls:clamp(28px, 10svh, 52px);
-    margin-bottom:clamp(10px,2.5svh,28px);
-  }
-  h1{font-size:clamp(1.125rem, .8rem + 1.4vw, 1.75rem)}
-  .micro{margin-bottom:clamp(12px,3svh,30px)}
-  /* The field's own cut at :145 is width-only, and landscape iPhone 15
-     is 844px wide, Pixel 7 915, Pro Max 932 — all above the 820px
-     threshold. So the field switched back ON for precisely the
-     viewports with the least room to spare, 64 animating nodes under a
-     full-viewport mask alongside the live canvas. */
-  .field{display:none}
-}
-
 @media (prefers-reduced-motion: reduce){
   *,*::before,*::after{animation:none !important;transition:none !important}
   /* Position is carried entirely by the drift keyframe, so a blanket
@@ -514,7 +485,7 @@ h1 em{font-style:normal;color:var(--accent-text)}
       </span>
     </div>
 
-    <h1><span>In sync, it&rsquo;s a <em>match</em>.</span></h1>
+    <h1>In sync, it&rsquo;s a <em>match</em>.</h1>
 
     <div class="micro">
       <p class="cap" aria-hidden="true">Out of sync, it stays hidden.</p>
